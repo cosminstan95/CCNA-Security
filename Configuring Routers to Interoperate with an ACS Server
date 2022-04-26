@@ -34,6 +34,6 @@ R1(config)# line vty 0 4
 R1(config-line)# authorization exec Author-Exec_via_TACACS
 R1(config-line)# login authentication AUTHEN_via_TACACS
 
-R1(config)# 
+Lab 
 
-R1(config)#
+https://itexamanswers.net/3-6-1-2-packet-tracer-configure-aaa-authentication-cisco-routers-answers.html
