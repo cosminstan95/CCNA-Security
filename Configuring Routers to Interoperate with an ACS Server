@@ -1,0 +1,39 @@
+Configuring Routers to Interoperate with an ACS Server
+
+! This command enables the configuration of the rest of the AAA
+! If it is in the configuration, it doesn't need to be put in again.
+! On most IOS systems, the default has aaa new-model disabled.
+
+R1(config)# aaa new-model
+
+This authentication method list, when applied to a line such as the VTY
+! lines will tell the router to prompt the user who is accessing that line
+! for a username and password in order for that user to login.
+
+R1(config)# aaa authentication login AUTHEN_via_TACACS group tacacs+ local
+
+!This next authorization method list, when applied to a line, will cause
+! the router
+
+R1(config)# aaa authorization exec Author-Exec_via_TACACS group tacacs+ local
+	
+! It is important to note that before we apply either of these method lists
+! to the VTY lines, we should create at least one local user as a backup
+
+R1(config)# username admin privilege 15 secret cisco
+
+! Next we need to create a least one ACS server that the router should try
+! to use
+
+R1(config)# tacacs-server host 192.168.1.252 key cisco123
+
+! Next, for the authentication method list and authorization method list
+! to be used we would need to apply them. In the example below
+! we are applying both method lists to the first five VTY lines.
+R1(config)# line vty 0 4
+R1(config-line)# authorization exec Author-Exec_via_TACACS
+R1(config-line)# login authentication AUTHEN_via_TACACS
+
+R1(config)# 
+
+R1(config)#
